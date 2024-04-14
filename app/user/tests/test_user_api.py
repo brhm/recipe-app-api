@@ -35,7 +35,7 @@ class PublicUserApiTests(TestCase):
         res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        user=get_user_model().objects.get(email=payload['email'])
+        user = get_user_model().objects.get(email=payload['email'])
         self.assertTrue(user.check_password(payload['password']))
         self.assertNotIn('password', res.data)
 
@@ -98,7 +98,7 @@ class PublicUserApiTests(TestCase):
 
     def test_create_token_blank_password(self):
         """Test posting a blank password returns an error."""
-        payload = {'email':'test@example.com', 'password': ''}
+        payload = {'email': 'test@example.com', 'password': ''}
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
